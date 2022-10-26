@@ -1,0 +1,38 @@
+
+// git init ---> to initialize as a repo
+// git remote add ---> to add a remote to the project, to tell the location where we need to push the code. 
+// set the remote as upstream
+
+
+// Interface method can not be static, if you declare method with static it becomes abstract method. 
+public  String quoteService();  --> An abstract method in the interface 
+
+// @Baen are only created to the Interfaces multiple times, as many times as you have implementations. But, return the implmentation body method. 
+// Which bean to inject - Two implementations are differentiated, which bean to get created is based on @Qualifier
+	@Bean
+	@Qualifier("chemTeacher")
+	public Teacher chemTeacher() {
+		return new MathTeacher();
+	}
+
+	@Bean
+	@Qualifier("mathTeacher")
+	public Teacher mathTeacher() {
+		return new MathTeacher();
+	}
+	
+	
+	// This hold true even in case of dependency refs of a class as well. 
+	Teacher class has dependency on QuoteService() ---> which has two implementations. So, 
+	
+	//Crete dependency of Teacher first, then pass the beanId into new math/chem Teacher()
+	@Bean
+	@Qualifier("motive")
+	public QuoteService motivationalQuoteService() {
+		return new MotivationalQuoteService();
+	}
+		
+	@Bean("good")
+	public QuoteService goodWordsQuoteService() {
+		return new GoodWordsQuoteService();
+	}
